@@ -15,20 +15,35 @@ app.use(express.json());
 app.get("/api/v1/names/:id", (req, res) => {
   // console.log("request receive", req.params);
   const { id } = req.params; //destructuring assignment
-  console.log("id-->", id);
-  console.log(productNames.map((item) => item.id));
-  if (productNames.map((item) => item.id) === id) {
-    console.log("product id match");
+//   console.log("id-->", id);
+//   console.log(productNames.map((item) => item.id));
+  const product = productNames.find((item) => item.id == id);
+  if (product) {
+    res.status(200).json({
+      status: "success",
+      message: "Product Name fetched successfully",
+      data: {
+        name: product,
+      },
+    });
   } else {
-    console.log("product id doesn't match");
+    res.status(404).json({
+      status: "falure",
+      message: "Not found",
+    });
   }
+  //   if (productNames.map((item) => item.id) === id) {
+  //     console.log("product id match");
+  //   } else {
+  //     console.log("product id doesn't match");
+  //   }
 
-  const filterData = productNames.filter((item) => item.id == id);
-  res.send({
-    status: 200,
-    message: "Product Name fetched successfully",
-    data: filterData,
-  });
+  //   const filterData = productNames.filter((item) => item.id == id);
+  //   res.send({
+  //     status: 200,
+  //     message: "Product Name fetched successfully",
+  //     data: filterData,
+  //   });
 });
 
 module.exports = app;
