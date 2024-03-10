@@ -21,15 +21,15 @@ app.get("/api/v1/names/:id", (req, res) => {
   if (product) {
     res.status(200).json({
       status: "success",
-      message: "Product Name fetched successfully",
+      message: "Product name fetched successfully",
       data: {
         name: product,
       },
     });
   } else {
     res.status(404).json({
-      status: "falure",
-      message: "Not found",
+      status: "failed",
+      message: "Not found!",
     });
   }
   //   if (productNames.map((item) => item.id) === id) {
